@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="50dp"
+                android:id="@+id/constraint">
+
+                <ImageView
+                    android:id="@+id/imglogo"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginVertical="20dp"
+                    android:layout_marginStart="40dp"
+                    android:src="@drawable/logoapp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtnamaapp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/imglogo"
+                    android:fontFamily="@font/barrioregular"
+                    android:textStyle="bold"
+                    android:textColor="@color/bg"
+                    android:gravity="center_horizontal"
+                    android:text="LIST PLANNER"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imglogo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/constraint"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/txtplan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/bg"
+                    android:text="@string/tagline"
+                    android:fontFamily="@font/barrioregular"
+                    android:gravity="center_horizontal"
+                    android:textSize="35sp"/>
+
+                <TextView
+                    android:id="@+id/txtbetter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtplan"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/bg"
+                    android:text="@string/plan"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:gravity="center_horizontal"
+                    android:textSize="22sp"/>
+
+                <TextView
+                    android:id="@+id/txtcreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtbetter"
+                    android:textColor="@color/bg"
+                    android:textSize="15sp"
+                    android:text="Create your account here"
+                    android:layout_marginTop="40dp"
+                    android:gravity="center"
+                    android:fontFamily="@font/poppinsmedium"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnregister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:cornerRadius="20dp"
+                    android:layout_below="@+id/txtcreate"
+                    android:text="Register"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textColor="@color/bg"
+                    android:backgroundTint="@color/kuningterang"
+                    />
+
+                <TextView
+                    android:id="@+id/txtor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_below="@+id/btnregister"
+                    android:textColor="@color/bg"
+                    android:text="OR"
+                    android:gravity="center"
+                    android:fontFamily="@font/poppinsmedium"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnlogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtor"
+                    android:layout_marginBottom="15dp"
+                    app:cornerRadius="20dp"
+                    android:text="login"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textColor="@color/bg"
+                    android:backgroundTint="@color/kuningterang"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btngoogle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cornerRadius="20dp"
+                    android:layout_below="@+id/btnlogin"
+                    android:text="Login with google"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textColor="@color/bg"
+                    android:backgroundTint="@color/kuningterang"
+                    android:layout_marginBottom="30dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

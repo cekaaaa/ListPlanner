@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "986036696154",
+    "project_id": "listplanner-24",
+    "storage_bucket": "listplanner-24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986036696154:android:206497a32022a9064ad463",
+        "android_client_info": {
+          "package_name": "com.chelsy.listplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986036696154-mnchh3rhqngnvboqqb84aga9q68b5d6b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH-gBn-E4NWkuAhE6hdVJcSpiDlNKOlyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986036696154-mnchh3rhqngnvboqqb84aga9q68b5d6b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
