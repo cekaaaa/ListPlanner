@@ -31,8 +31,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linear">
+        android:layout_height="match_parent"
+        android:layout_below="@id/linear"
+        android:layout_marginTop="20dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recPlan"
             android:layout_width="match_parent"

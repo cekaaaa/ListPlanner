@@ -7,21 +7,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class ActPlan extends AppCompatActivity {
     FloatingActionButton addPlan;
     FirebaseFirestore db;
     RecyclerView recyclerPlan;
-    CollectionReference planRef;
+    ArrayList<Plans> plansArr;
     PlanAdapter adapter;
 
     @Override
@@ -35,7 +42,13 @@ public class ActPlan extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         recyclerPlan = findViewById(R.id.recPlan);
-        planRef = db.collection("Plans");
+        recyclerPlan.setLayoutManager(new LinearLayoutManager(this));
+        recyclerPlan.setHasFixedSize(true);
+
+        plansArr = new ArrayList<Plans>();
+        adapter = new PlanAdapter(getBaseContext(), plansArr);
+        recyclerPlan.setAdapter(adapter);
+        PopData();
 
         addPlan = (FloatingActionButton) findViewById(R.id.addPlan);
         addPlan.setOnClickListener(new View.OnClickListener() {
@@ -45,30 +58,24 @@ public class ActPlan extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    initData();
-    }
-    public void initData(){
-        Query query = planRef;
-        FirestoreRecyclerOptions<Plans> options = new FirestoreRecyclerOptions.Builder<Plans>()
-                .setQuery(query, Plans.class)
-                .build();
-
-        adapter = new PlanAdapter(options);
-
-        recyclerPlan.setHasFixedSize(true);
-        recyclerPlan.setLayoutManager(new LinearLayoutManager(getBaseContext()));
-        recyclerPlan.setAdapter(adapter);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        adapter.startListening();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        adapter.stopListening();
+    private void PopData() {
+        db.collection("Plans")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()) {
+                            for(QueryDocumentSnapshot document: task.getResult()) {
+                                Plans plans = new Plans(document.getString("title"),
+                                        document.getString("date"),
+                                        document.getString("time"));
+                                plansArr.add(plans);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
     }
 }
