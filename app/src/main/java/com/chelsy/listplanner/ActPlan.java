@@ -84,8 +84,8 @@ public class ActPlan extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()) {
-                            for(QueryDocumentSnapshot document: task.getResult()) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Plans plans = new Plans(document.getString("title"),
                                         document.getString("date"),
                                         document.getString("time"));
