@@ -53,7 +53,7 @@ public class ActPlan extends AppCompatActivity {
         recyclerPlan.setHasFixedSize(true);
 
         plansArr = new ArrayList<AlterPlans>();
-        adapter = new PlanAdapter(getBaseContext(), plansArr);
+        adapter = new PlanAdapter(ActPlan.this, plansArr);
         recyclerPlan.setAdapter(adapter);
         PopData();
 

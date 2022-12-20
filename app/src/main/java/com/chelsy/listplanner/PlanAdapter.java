@@ -27,6 +27,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     Context context;
     ArrayList<AlterPlans> plansArr;
     FirebaseFirestore db;
+    AlertDialog.Builder builder;
 
     public PlanAdapter(Context context, ArrayList<AlterPlans> plansArr) {
         this.context = context;
@@ -42,6 +43,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        db = FirebaseFirestore.getInstance();
         AlterPlans alterPlans = plansArr.get(position);
         holder.editTitle.setText(alterPlans.title);
         holder.editDate.setText(alterPlans.date);
@@ -49,8 +51,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         holder.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(context, "Uid " + alterPlans.uId, Toast.LENGTH_SHORT).show();
                 deletePlan(alterPlans.uId);
-                Toast.makeText(context, "uId" + alterPlans.uId, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -76,25 +78,25 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         }
     }
 
-    private void deletePlan(String docId) {
-        new MaterialAlertDialogBuilder(context.getApplicationContext())
-                .setMessage("Are you sure to delete this plan?")
+    private void deletePlan(String uId) {
+        builder = new AlertDialog.Builder(context);
+        builder.setMessage("Are you sure to delete this plan?")
                 .setCancelable(false)
                 .setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        db.collection("Plans").document(docId)
+                        db.collection("Plans").document(uId)
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
-                                        Toast.makeText(context.getApplicationContext(), "Plan has been deleted", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Plan has been deleted", Toast.LENGTH_SHORT).show();
                                         notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(context.getApplicationContext(), "Plan cannot be deleted", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Plan cannot be deleted", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                     }
