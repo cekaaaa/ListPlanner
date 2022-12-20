@@ -32,7 +32,7 @@ public class ActPlan extends AppCompatActivity {
     FloatingActionButton addPlan;
     FirebaseFirestore db;
     RecyclerView recyclerPlan;
-    ArrayList<Plans> plansArr;
+    ArrayList<AlterPlans> plansArr;
     PlanAdapter adapter;
     FirebaseAuth mAuth;
     ImageView profileImg;
@@ -52,7 +52,7 @@ public class ActPlan extends AppCompatActivity {
         recyclerPlan.setLayoutManager(new LinearLayoutManager(this));
         recyclerPlan.setHasFixedSize(true);
 
-        plansArr = new ArrayList<Plans>();
+        plansArr = new ArrayList<AlterPlans>();
         adapter = new PlanAdapter(getBaseContext(), plansArr);
         recyclerPlan.setAdapter(adapter);
         PopData();
@@ -86,10 +86,11 @@ public class ActPlan extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Plans plans = new Plans(document.getString("title"),
+                                AlterPlans alterPlans = new AlterPlans(document.getString("title"),
                                         document.getString("date"),
-                                        document.getString("time"));
-                                plansArr.add(plans);
+                                        document.getString("time"),
+                                        document.getId());
+                                plansArr.add(alterPlans);
                             }
                             adapter.notifyDataSetChanged();
                         }

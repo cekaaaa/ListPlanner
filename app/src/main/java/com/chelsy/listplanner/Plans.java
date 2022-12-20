@@ -19,7 +19,6 @@ public class Plans {
 
     public String desc;
     public String uId;
-    public String docId;
 
     public Plans(String title, String date, String time) {
         this.title = title;

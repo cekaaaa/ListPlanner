@@ -12,10 +12,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -23,10 +25,10 @@ import java.util.ArrayList;
 public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<Plans> plansArr;
+    ArrayList<AlterPlans> plansArr;
     FirebaseFirestore db;
 
-    public PlanAdapter(Context context, ArrayList<Plans> plansArr) {
+    public PlanAdapter(Context context, ArrayList<AlterPlans> plansArr) {
         this.context = context;
         this.plansArr = plansArr;
     }
@@ -40,16 +42,18 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Plans plans = plansArr.get(position);
-        holder.editTitle.setText(plans.title);
-        holder.editDate.setText(plans.date);
-        holder.editTime.setText(plans.time);
+        AlterPlans alterPlans = plansArr.get(position);
+        holder.editTitle.setText(alterPlans.title);
+        holder.editDate.setText(alterPlans.date);
+        holder.editTime.setText(alterPlans.time);
         holder.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deletePlan(plans.docId);
+                deletePlan(alterPlans.uId);
+                Toast.makeText(context, "uId" + alterPlans.uId, Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     @Override
@@ -60,6 +64,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView editTitle, editDate, editTime;
         Button btndelete;
+        CardView cardPlans;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,15 +72,15 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
             editDate = (TextView) itemView.findViewById(R.id.txtdate);
             editTime = (TextView) itemView.findViewById(R.id.txttime);
             btndelete = (Button) itemView.findViewById(R.id.btndelete);
+            cardPlans = (CardView) itemView.findViewById(R.id.cardPlan);
         }
     }
 
     private void deletePlan(String docId) {
-        AlertDialog alertDialog;
-        alertDialog = new AlertDialog.Builder(context)
+        new MaterialAlertDialogBuilder(context.getApplicationContext())
                 .setMessage("Are you sure to delete this plan?")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         db.collection("Plans").document(docId)
@@ -92,10 +97,9 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                                         Toast.makeText(context.getApplicationContext(), "Plan cannot be deleted", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton("No, Keep it", null)
                 .show();
 
     }
