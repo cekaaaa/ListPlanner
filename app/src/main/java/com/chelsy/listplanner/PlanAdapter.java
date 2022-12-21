@@ -52,8 +52,8 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         holder.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Uid " + alterPlans.uId, Toast.LENGTH_SHORT).show();
-                deletePlan(alterPlans.uId);
+
+                deletePlan(alterPlans.uId, alterPlans);
             }
         });
         holder.cardPlans.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +86,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         }
     }
 
-    private void deletePlan(String uId) {
+    private void deletePlan(String uId, AlterPlans alterPlans) {
         builder = new AlertDialog.Builder(context);
         builder.setMessage("Are you sure to delete this plan?")
                 .setCancelable(false)
@@ -99,6 +99,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                                     @Override
                                     public void onSuccess(Void unused) {
                                         Toast.makeText(context, "Plan has been deleted", Toast.LENGTH_SHORT).show();
+                                        plansArr.remove(alterPlans);
                                         notifyDataSetChanged();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {

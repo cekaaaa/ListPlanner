@@ -11,15 +11,21 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -29,6 +35,8 @@ import com.google.firebase.firestore.auth.User;
 import java.util.ArrayList;
 
 public class ActPlan extends AppCompatActivity {
+    TextView txtprofile;
+    String username;
     FloatingActionButton addPlan;
     FirebaseFirestore db;
     RecyclerView recyclerPlan;
@@ -74,9 +82,30 @@ public class ActPlan extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        txtprofile = (TextView) findViewById(R.id.profile);
+        getUser();
     }
 
-    private void PopData() {
+    public void getUser() {
+        String uId = mAuth.getCurrentUser().getUid();
+        db.collection("Users").document(uId)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        username = documentSnapshot.getString("username");
+                        txtprofile.setText("Hello, " + username);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getBaseContext(), "Set your username first", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void PopData() {
         String uId = mAuth.getCurrentUser().getUid();
         db.collection("Plans")
                 .whereEqualTo("uId", uId)

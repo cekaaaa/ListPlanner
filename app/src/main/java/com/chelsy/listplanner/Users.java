@@ -1,11 +1,11 @@
 package com.chelsy.listplanner;
 
 public class Users {
-    public String name;
+    public String username;
     public String email;
 
-    public Users(String name, String email) {
-        this.name = name;
+    public Users(String username, String email) {
+        this.username = username;
         this.email = email;
     }
 
