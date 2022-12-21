@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // to remember account
     private void checkLogin() {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser != null) {
@@ -110,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // sign in google
     private  void signInGoogle(GoogleSignInAccount account){
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)

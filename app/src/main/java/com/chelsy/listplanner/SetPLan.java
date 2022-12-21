@@ -86,6 +86,9 @@ public class SetPLan extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        String paramUId = intent.getStringExtra("uId");
+        Toast.makeText(this, "uId" + paramUId, Toast.LENGTH_SHORT).show();
     }
 
     private void dateDialog(EditText dateEdit) {

@@ -59,6 +59,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
+    // Validation
     private void doRegister() {
         inputUser = inputUserEdit.getText().toString().trim();
         inputEmail = inputEmailEdit.getText().toString().trim();
@@ -101,6 +102,7 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+        // register account
         mAuth.createUserWithEmailAndPassword(inputEmail, inputPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

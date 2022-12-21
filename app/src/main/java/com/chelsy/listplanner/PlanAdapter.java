@@ -3,6 +3,7 @@ package com.chelsy.listplanner;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,7 +56,14 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 deletePlan(alterPlans.uId);
             }
         });
-
+        holder.cardPlans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, SetPLan.class);
+                intent.putExtra("uId", alterPlans.uId);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    //validation
     private void doLogin() {
         email = inputemail.getText().toString().trim();
         pass = inputpass.getText().toString().trim();
@@ -68,6 +69,7 @@ public class Login extends AppCompatActivity {
             return;
         }
 
+        // login account
         mAuth.signInWithEmailAndPassword(email, pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
