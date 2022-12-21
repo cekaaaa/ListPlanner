@@ -15,11 +15,14 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.DateFormat;
@@ -33,6 +36,7 @@ public class SetPLan extends AppCompatActivity {
     Calendar calendar;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
+    String uIdPlan;
 
 
     @Override
@@ -87,8 +91,11 @@ public class SetPLan extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        String paramUId = intent.getStringExtra("uId");
-        Toast.makeText(this, "uId" + paramUId, Toast.LENGTH_SHORT).show();
+        uIdPlan = intent.getStringExtra("uId");
+
+        if (uIdPlan != null) {
+            editPlan(uIdPlan);
+        }
     }
 
     private void dateDialog(EditText dateEdit) {
@@ -111,7 +118,7 @@ public class SetPLan extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void timeDialog(EditText timeEdit){
+    private void timeDialog(EditText timeEdit) {
         TimePickerDialog timePickerDialog;
         TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
@@ -128,7 +135,7 @@ public class SetPLan extends AppCompatActivity {
         timePickerDialog.show();
     }
 
-    public void addPlan(){
+    public void addPlan() {
         String inputTitle, inputDate, inputTime, inputDesc, uId;
         inputTitle = nameEdit.getText().toString().trim();
         inputDate = dateEdit.getText().toString().trim();
@@ -136,54 +143,98 @@ public class SetPLan extends AppCompatActivity {
         inputDesc = descEdit.getText().toString().trim();
         uId = mAuth.getCurrentUser().getUid();
 
-        if(inputTitle.isEmpty()){
+        if (inputTitle.isEmpty()) {
             nameEdit.setError("Name of plan is required");
             nameEdit.requestFocus();
             return;
         }
-        if(inputDate.isEmpty()){
+        if (inputDate.isEmpty()) {
             dateEdit.setError("Set date is required");
             dateEdit.requestFocus();
             return;
         }
-        if (inputTime.isEmpty()){
+        if (inputTime.isEmpty()) {
             timeEdit.setError("Set time is required");
             timeEdit.requestFocus();
             return;
         }
-        if (inputDesc.isEmpty()){
+        if (inputDesc.isEmpty()) {
             descEdit.setError("Description of plan is required");
             descEdit.requestFocus();
             return;
         }
-        if (inputDesc.length() < 50){
+        if (inputDesc.length() < 50) {
             descEdit.setError("Decription must be minimum 50 characters");
             descEdit.requestFocus();
             return;
         }
-        if (inputTitle.length() < 10){
+        if (inputTitle.length() < 10) {
             nameEdit.setError("Name of plan must be minimum 10 characters");
             nameEdit.requestFocus();
             return;
         }
 
         Plans dataPlan = new Plans(inputTitle, inputDate, inputTime, inputDesc, uId);
-        db.collection("Plans")
-                .add(dataPlan)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        if (uIdPlan != null) {
+            db.collection("Plans").document(uIdPlan)
+                    .set(dataPlan)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Toast.makeText(getBaseContext(), "Plan has been updated", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getBaseContext(), ActPlan.class);
+                                startActivity(intent);
+                                finish();
+                            }
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getBaseContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            db.collection("Plans")
+                    .add(dataPlan)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(getBaseContext(), "Your plan has been added", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getBaseContext(), ActPlan.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getBaseContext(), "An error has been occured " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+        }
+    }
+
+    private void editPlan(String uIdPlan) {
+        db.collection("Plans").document(uIdPlan)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getBaseContext(), "Your plan has been added", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(getBaseContext(), ActPlan.class);
-                        startActivity(intent);
-                        finish();
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot documentSnapshot = task.getResult();
+                        if (documentSnapshot.exists()) {
+                            nameEdit.setText(documentSnapshot.getString("title"));
+                            dateEdit.setText(documentSnapshot.getString("date"));
+                            timeEdit.setText(documentSnapshot.getString("time"));
+                            descEdit.setText(documentSnapshot.getString("desc"));
+                        }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getBaseContext(), "An error has been occured " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "Error " + e.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
     }
+
 }
