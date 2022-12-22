@@ -96,6 +96,7 @@ public class ActPlan extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         username = documentSnapshot.getString("username");
                         txtprofile.setText("Hello, " + username);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

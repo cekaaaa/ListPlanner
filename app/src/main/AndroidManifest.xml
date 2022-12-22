@@ -15,6 +15,20 @@
         android:theme="@style/Theme.ListPlanner"
         tools:targetApi="31">
         <activity
+            android:name=".ActEditProfile"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ActCredit"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ActProfile"
             android:exported="false">
             <meta-data

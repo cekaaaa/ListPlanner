@@ -6,19 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".ActProfile">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnlogout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="15dp"
-        app:cornerRadius="20dp"
-        android:padding="10dp"
-        android:text="Logout"
-        android:textSize="15dp"
-        android:fontFamily="@font/poppinssemibold"
-        android:textColor="@color/bg"
-        android:backgroundTint="@color/kuningterang"
-        />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:background="@drawable/rectangle">
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/circle" />
+
+                <TextView
+                    android:id="@+id/txtprofilename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppinsbold"
+                    android:gravity="center_horizontal"
+                    android:text="name"
+                    android:textColor="@color/bg"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/txtprofileemail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:gravity="center_horizontal"
+                    android:text="email"
+                    android:textColor="@color/bg"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/txtprofilename"
+                    tools:layout_editor_absoluteX="0dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btneditprofile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                app:cornerRadius="20dp"
+                android:padding="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:text="Edit Profile"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:textColor="@color/bg"
+                android:backgroundTint="@color/kuningterang"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnlogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="15dp"
+                app:cornerRadius="20dp"
+                android:padding="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:text="@string/logout"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppinssemibold"
+                android:textColor="@color/bg"
+                android:backgroundTint="@color/kuningterang"
+                />
+            <TextView
+                android:id="@+id/txtabout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="30dp"
+                android:text="About Developer"
+                android:fontFamily="@font/poppinsmedium"
+                android:gravity="center_horizontal"
+                android:textColor="@color/bg"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
