@@ -19,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ActProfile extends AppCompatActivity {
 
-    Button logout;
+    Button logout, editprofile;
     TextView txtname, txtemail;
     FirebaseAuth mAuth;
     String username, email;
@@ -47,6 +47,14 @@ public class ActProfile extends AppCompatActivity {
 
         txtname = (TextView) findViewById(R.id.txtprofilename);
         txtemail = (TextView) findViewById(R.id.txtprofileemail);
+        editprofile = (Button) findViewById(R.id.btneditprofile);
+        editprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ActEditProfile.class);
+                startActivity(intent);
+            }
+        });
         getUser();
     }
 

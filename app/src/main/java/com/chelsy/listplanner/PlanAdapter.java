@@ -52,7 +52,6 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         holder.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 deletePlan(alterPlans.uId, alterPlans);
             }
         });
