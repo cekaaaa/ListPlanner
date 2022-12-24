@@ -5,71 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ActEditProfile">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_margin="20dp">
+            android:layout_margin="20dp"
+            android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:fontFamily="@font/poppinsbold"
+                android:gravity="center_horizontal"
                 android:text="Edit Profile"
                 android:textColor="@color/bg"
                 android:textSize="25sp" />
 
-            <ImageView
+
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginVertical="20dp"
                 android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/circle" />
+                android:layout_marginVertical="20dp"
+                app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                app:strokeColor="@color/kuningterang"
+                app:strokeWidth="1dp" />
 
             <TextView
+                android:id="@+id/changeimg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
-                android:textColor="@color/bg"
-                android:text="Change Picture"
                 android:fontFamily="@font/poppinsmedium"
-                android:gravity="center_horizontal"/>
+                android:gravity="center_horizontal"
+                android:text="Change Picture"
+                android:textColor="@color/bg" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Username"
                 android:layout_marginVertical="6dp"
+                android:hint="Username"
                 app:boxBackgroundColor="@color/beige"
                 app:startIconDrawable="@drawable/username"
                 app:startIconTint="@color/bg">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppinsregular"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
                 android:layout_marginVertical="6dp"
+                android:hint="Email"
                 app:boxBackgroundColor="@color/beige"
                 app:startIconDrawable="@drawable/mail"
                 app:startIconTint="@color/bg">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppinsregular"
                     android:enabled="false"
-                    android:inputType="textEmailAddress"/>
+                    android:fontFamily="@font/poppinsregular"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

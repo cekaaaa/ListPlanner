@@ -12,18 +12,22 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class ActProfile extends AppCompatActivity {
 
     Button logout, editprofile;
-    TextView txtname, txtemail;
+    TextView txtname, txtemail, credit;
     FirebaseAuth mAuth;
     String username, email;
     FirebaseFirestore db;
+    ShapeableImageView profPic;
+    String imgUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class ActProfile extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        profPic = findViewById(R.id.imageView);
         logout = (Button) findViewById(R.id.btnlogout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,6 +52,14 @@ public class ActProfile extends AppCompatActivity {
 
         txtname = (TextView) findViewById(R.id.txtprofilename);
         txtemail = (TextView) findViewById(R.id.txtprofileemail);
+        credit = (TextView) findViewById(R.id.txtabout);
+        credit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), ActCredit.class);
+                startActivity(intent);
+            }
+        });
         editprofile = (Button) findViewById(R.id.btneditprofile);
         editprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +80,10 @@ public class ActProfile extends AppCompatActivity {
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         username = documentSnapshot.getString("username");
                         email = documentSnapshot.getString("email");
+                        imgUrl = documentSnapshot.getString("profileLocation");
                         txtname.setText(username);
                         txtemail.setText(email);
+                        Picasso.get().load(imgUrl).into(profPic);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

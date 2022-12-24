@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,7 +23,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,6 +36,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.auth.User;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -43,16 +49,38 @@ public class ActPlan extends AppCompatActivity {
     ArrayList<AlterPlans> plansArr;
     PlanAdapter adapter;
     FirebaseAuth mAuth;
-    ImageView profileImg;
+    ShapeableImageView profPic;
+    String imgUrl;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.nav_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.home){
+            Intent intent = new Intent(getBaseContext(), ActPlan.class);
+            startActivity(intent);
+        }
+        if (id == R.id.profile){
+            Intent intent = new Intent(getBaseContext(), ActProfile.class);
+            startActivity(intent);
+        }
+        if (id == R.id.about){
+            Intent intent = new Intent(getBaseContext(), ActCredit.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -74,8 +102,8 @@ public class ActPlan extends AppCompatActivity {
             }
         });
 
-        profileImg = (ImageView) findViewById(R.id.imgprofile);
-        profileImg.setOnClickListener(new View.OnClickListener() {
+        profPic = findViewById(R.id.imgprofile);
+        profPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ActProfile.class);
@@ -95,8 +123,9 @@ public class ActPlan extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         username = documentSnapshot.getString("username");
+                        imgUrl = documentSnapshot.getString("profileLocation");
                         txtprofile.setText("Hello, " + username);
-
+                        Picasso.get().load(imgUrl).into(profPic);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

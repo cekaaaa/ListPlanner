@@ -17,15 +17,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:background="@drawable/rectangle">
-                <ImageView
-                    android:id="@+id/imageView"
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgprofile"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="60dp"
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    android:src="@drawable/img"
+                    android:layout_marginTop="50dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/img"/>
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
                     android:id="@+id/textView"
@@ -37,7 +42,7 @@
                     android:text="Chelsy Kwan"
                     android:textColor="@color/bg"
                     android:textSize="25sp"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/imgprofile" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -53,12 +58,56 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="desc"
+                android:text="@string/decs_credit"
                 android:gravity="center"
                 android:fontFamily="@font/poppinsregular"
                 android:textColor="@color/bg"
                 android:textSize="15sp"
-                android:layout_marginVertical="15dp"/>
+                android:layout_margin="25dp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Connected with me :"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:textColor="@color/bg"
+                android:textSize="15sp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/instagram"/>
+                <ImageView
+                    android:id="@+id/linkedin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:src="@drawable/linkedin"/>
+                <ImageView
+                    android:id="@+id/github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/github"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/ukrida"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ukrida_logo"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"/>
 
         </LinearLayout>
     </ScrollView>

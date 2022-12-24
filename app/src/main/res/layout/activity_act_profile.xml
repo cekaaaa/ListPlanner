@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,7 +19,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:background="@drawable/rectangle">
-                <ImageView
+
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imageView"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -26,7 +28,10 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/circle" />
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="1dp"
+                    tools:ignore="MissingConstraints" />
 
                 <TextView
                     android:id="@+id/txtprofilename"
@@ -58,40 +63,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                app:cornerRadius="20dp"
-                android:padding="10dp"
                 android:layout_marginHorizontal="20dp"
-                android:text="Edit Profile"
-                android:textSize="15sp"
-                android:fontFamily="@font/poppinssemibold"
-                android:textColor="@color/bg"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/kuningterang"
-                />
+                android:fontFamily="@font/poppinssemibold"
+                android:padding="10dp"
+                android:text="Edit Profile"
+                android:textColor="@color/bg"
+                android:textSize="15sp"
+                app:cornerRadius="20dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnlogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="15dp"
-                app:cornerRadius="20dp"
-                android:padding="10dp"
                 android:layout_marginHorizontal="20dp"
-                android:text="@string/logout"
-                android:textSize="15sp"
-                android:fontFamily="@font/poppinssemibold"
-                android:textColor="@color/bg"
+                android:layout_marginVertical="15dp"
                 android:backgroundTint="@color/kuningterang"
-                />
+                android:fontFamily="@font/poppinssemibold"
+                android:padding="10dp"
+                android:text="@string/logout"
+                android:textColor="@color/bg"
+                android:textSize="15sp"
+                app:cornerRadius="20dp" />
+
             <TextView
                 android:id="@+id/txtabout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
-                android:text="About Developer"
                 android:fontFamily="@font/poppinsmedium"
                 android:gravity="center_horizontal"
-                android:textColor="@color/bg"/>
+                android:text="About Developer"
+                android:textColor="@color/bg" />
 
         </LinearLayout>
     </ScrollView>

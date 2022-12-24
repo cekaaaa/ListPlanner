@@ -3,4 +3,8 @@
     <string name="tagline">Organize you Plan </string>
     <string name="plan">For better future</string>
     <string name="logout">Logout</string>
+    <string name="decs_credit">Saya Chelsy Kwan merupakan mahasiswi semester 5 dari Universitas Kriten Krida Wacana.
+        Saya mengambil jurusan Informatika dari Fakultas Teknik dan Ilmu Komputer.
+        Saya membuat aplikasi android yang bernama "List Planner" dengan tujuan agar
+        aplikasi ini dapat digunakan sebagai list plan yang ingin dicapai setiap orang. </string>
 </resources>
