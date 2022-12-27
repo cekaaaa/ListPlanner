@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActCredit">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/rectangle">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgprofile"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                    app:strokeColor="@color/white"
+                    app:strokeWidth="2dp"
+                    android:src="@drawable/img"
+                    android:layout_marginTop="50dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/poppinsbold"
+                    android:gravity="center_horizontal"
+                    android:text="Chelsy Kwan"
+                    android:textColor="@color/bg"
+                    android:textSize="25sp"
+                    app:layout_constraintTop_toBottomOf="@+id/imgprofile" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppinsmedium"
+                    android:gravity="center_horizontal"
+                    android:text="412020035"
+                    android:textColor="@color/bg"
+                    android:textSize="15sp"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    tools:layout_editor_absoluteX="16dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/decs_credit"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsregular"
+                android:textColor="@color/bg"
+                android:textSize="15sp"
+                android:layout_margin="20dp"
+                android:textAlignment="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Connected with me :"
+                android:gravity="center"
+                android:fontFamily="@font/poppinsmedium"
+                android:textColor="@color/bg"
+                android:textSize="15sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="5dp"
+                android:textAlignment="center"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="20dp">
+                <ImageView
+                    android:id="@+id/instagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/instagram"/>
+                <ImageView
+                    android:id="@+id/linkedin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:src="@drawable/linkedin"/>
+                <ImageView
+                    android:id="@+id/github"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/github"/>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/ukrida"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ukrida_logo"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

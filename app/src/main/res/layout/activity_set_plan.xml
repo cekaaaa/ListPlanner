@@ -30,7 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 android:hint="Title Plan"
-                app:boxBackgroundColor="@color/beige">
+                app:boxBackgroundColor="@color/beige"
+                app:startIconDrawable="@drawable/title"
+                app:startIconTint="@color/bg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/titlePlan"
@@ -45,7 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 android:hint="Date"
-                app:boxBackgroundColor="@color/beige">
+                app:boxBackgroundColor="@color/beige"
+                app:startIconDrawable="@drawable/date"
+                app:startIconTint="@color/bg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/date"
@@ -62,7 +66,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 android:hint="Time"
-                app:boxBackgroundColor="@color/beige">
+                app:boxBackgroundColor="@color/beige"
+                app:startIconDrawable="@drawable/time"
+                app:startIconTint="@color/bg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/time"
@@ -79,7 +85,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="6dp"
                 android:hint="Description"
-                app:boxBackgroundColor="@color/beige">
+                app:boxBackgroundColor="@color/beige"
+                app:startIconDrawable="@drawable/desc"
+                app:startIconTint="@color/bg">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/desc"

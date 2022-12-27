@@ -1,25 +1,50 @@
 package com.chelsy.listplanner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
 public class ActCredit extends AppCompatActivity {
 
     ImageView linkedin, instagram, github, ukrida;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.nav_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.home){
+            Intent intent = new Intent(getBaseContext(), ActPlan.class);
+            startActivity(intent);
+        }
+        if (id == R.id.profile){
+            Intent intent = new Intent(getBaseContext(), ActProfile.class);
+            startActivity(intent);
+        }
+        if (id == R.id.about){
+            Intent intent = new Intent(getBaseContext(), ActCredit.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_credit);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
 
         linkedin = (ImageView) findViewById(R.id.linkedin);
         linkedin.setOnClickListener(new View.OnClickListener() {

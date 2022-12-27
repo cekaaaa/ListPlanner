@@ -18,35 +18,37 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="50dp"
+                android:layout_marginVertical="20dp"
                 android:id="@+id/constraint">
 
                 <ImageView
                     android:id="@+id/imglogo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-
-                    android:layout_marginStart="40dp"
                     android:src="@drawable/logoapp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/txtnamaapp"
+                    app:layout_constraintHorizontal_bias="0.953"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/txtnamaapp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="212dp"
                     android:layout_toEndOf="@+id/imglogo"
                     android:fontFamily="@font/poppinsbold"
-                    android:textStyle="bold"
-                    android:textColor="@color/bg"
                     android:gravity="center_horizontal"
                     android:text="LIST PLANNER"
+                    android:textColor="@color/bg"
                     android:textSize="30sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imglogo"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.666" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -87,7 +89,7 @@
                     android:textColor="@color/bg"
                     android:textSize="15sp"
                     android:text="Create your account here"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:fontFamily="@font/poppinsmedium"
                     />
