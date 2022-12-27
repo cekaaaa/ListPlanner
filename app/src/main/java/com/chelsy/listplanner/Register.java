@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class Register extends AppCompatActivity {
     TextView login;
     String inputUser, inputEmail, inputPass, inputRepass;
     Button btnregis;
+    ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     Map<String, Object> user = new HashMap<>();
@@ -44,6 +46,8 @@ public class Register extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
 
         inputUserEdit = (EditText) findViewById(R.id.txtusername);
         inputEmailEdit = (EditText) findViewById(R.id.txtemail);
@@ -112,6 +116,7 @@ public class Register extends AppCompatActivity {
             return;
         }
 
+        progressBar.setVisibility(View.VISIBLE);
         // register account
         mAuth.createUserWithEmailAndPassword(inputEmail, inputPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -127,6 +132,7 @@ public class Register extends AppCompatActivity {
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void unused) {
+                                            progressBar.setVisibility(View.GONE);
                                             Toast.makeText(getBaseContext(), "Your account has been registered", Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(getBaseContext(), Login.class);
                                             startActivity(intent);
@@ -134,10 +140,12 @@ public class Register extends AppCompatActivity {
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
+                                            progressBar.setVisibility(View.GONE);
                                             Toast.makeText(getBaseContext(), "Failed to register you account!", Toast.LENGTH_LONG).show();
                                         }
                                     });
                         } else {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "Failed to register you account!", Toast.LENGTH_LONG).show();
                         }
                     }

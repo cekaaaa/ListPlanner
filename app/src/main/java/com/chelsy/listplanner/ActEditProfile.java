@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +43,7 @@ public class ActEditProfile extends AppCompatActivity {
     private static final int PICK_IMG = 1;
     ShapeableImageView profPic;
     StorageReference mStore;
+    ProgressBar progressBar;
 
     private Uri imUri;
 
@@ -62,6 +65,8 @@ public class ActEditProfile extends AppCompatActivity {
         profPic = (ShapeableImageView) findViewById(R.id.imageView);
         inputname = (EditText) findViewById(R.id.username);
         inputemail = (EditText) findViewById(R.id.email);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         getCurrentProfile();
         btnsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +126,8 @@ public class ActEditProfile extends AppCompatActivity {
             inputname.requestFocus();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
+
         if (imUri != null) {
             StorageReference fileR = mStore.child(System.currentTimeMillis() + "." + getFileExt(imUri));
             fileR.putFile(imUri)
@@ -139,23 +146,29 @@ public class ActEditProfile extends AppCompatActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
+                                                        progressBar.setVisibility(View.GONE);
                                                         Toast.makeText(getBaseContext(), "Profile has been updated", Toast.LENGTH_LONG).show();
                                                         Intent intent = new Intent(getBaseContext(), ActProfile.class);
                                                         startActivity(intent);
                                                         finish();
+
                                                     }
                                                 }
                                             }).addOnFailureListener(new OnFailureListener() {
                                                 @Override
                                                 public void onFailure(@NonNull Exception e) {
+                                                    progressBar.setVisibility(View.GONE);
                                                     Toast.makeText(getBaseContext(), "Error has been occured " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
                                                 }
                                             });
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
+                                    progressBar.setVisibility(View.GONE);
                                     Toast.makeText(getBaseContext(), "There has been an error when uploading a document: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
                                 }
                             });
                         }
@@ -167,15 +180,19 @@ public class ActEditProfile extends AppCompatActivity {
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "Your profile has been updated", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getBaseContext(), ActProfile.class);
                             startActivity(intent);
                             finish();
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(ActEditProfile.this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
                         }
                     });
         }

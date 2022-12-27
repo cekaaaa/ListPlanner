@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ public class SetPLan extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     String uIdPlan;
-
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +50,8 @@ public class SetPLan extends AppCompatActivity {
         }
         setContentView(R.layout.activity_set_plan);
 
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.GONE);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -174,6 +177,7 @@ public class SetPLan extends AppCompatActivity {
             nameEdit.requestFocus();
             return;
         }
+        progressBar.setVisibility(View.VISIBLE);
 
         Plans dataPlan = new Plans(inputTitle, inputDate, inputTime, inputDesc, uId);
         if (uIdPlan != null) {
@@ -183,6 +187,7 @@ public class SetPLan extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
+                                progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Plan has been updated", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getBaseContext(), ActPlan.class);
                                 startActivity(intent);
@@ -192,6 +197,7 @@ public class SetPLan extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -201,6 +207,7 @@ public class SetPLan extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "Your plan has been added", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(getBaseContext(), ActPlan.class);
                             startActivity(intent);
@@ -210,6 +217,7 @@ public class SetPLan extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "An error has been occured " + e.getMessage(), Toast.LENGTH_LONG).show();
                         }
                     });
