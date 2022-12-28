@@ -32,6 +32,7 @@ public class ActProfile extends AppCompatActivity {
     ShapeableImageView profPic;
     String imgUrl;
 
+    // Menu inflater
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -39,6 +40,7 @@ public class ActProfile extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // item menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -62,8 +64,10 @@ public class ActProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_profile);
 
+        // firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
         profPic = findViewById(R.id.imageView);
         logout = (Button) findViewById(R.id.btnlogout);
         logout.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +99,7 @@ public class ActProfile extends AppCompatActivity {
         getUser();
     }
 
+    // get user for profile picture, username, email by uid user
     public void getUser() {
         String uId = mAuth.getCurrentUser().getUid();
         db.collection("Users").document(uId)
@@ -117,6 +122,7 @@ public class ActProfile extends AppCompatActivity {
                 });
     }
 
+    // logout
     private void checkLogout() {
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
         if (firebaseUser == null) {

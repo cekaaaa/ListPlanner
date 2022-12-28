@@ -44,7 +44,6 @@ public class ActEditProfile extends AppCompatActivity {
     ShapeableImageView profPic;
     StorageReference mStore;
     ProgressBar progressBar;
-
     private Uri imUri;
 
     @Override
@@ -52,14 +51,16 @@ public class ActEditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_act_edit_profile);
 
-
+        //hide action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
+        // firebase
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         mStore = FirebaseStorage.getInstance().getReference("User Picture");
+
         btnsave = (Button) findViewById(R.id.save);
         btncancel = (Button) findViewById(R.id.cancel);
         profPic = (ShapeableImageView) findViewById(R.id.imageView);
@@ -92,6 +93,7 @@ public class ActEditProfile extends AppCompatActivity {
 
     }
 
+    // open storage user
     private void openStorage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -99,24 +101,25 @@ public class ActEditProfile extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMG);
     }
 
+    // get intent result
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMG && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             imUri = data.getData();
-
             Picasso.get().load(imUri).into(profPic);
         }
-
     }
 
+    // get file extention image
     private String getFileExt(Uri uri) {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
 
+    // edit profile
     private void editProfile() {
         String uId = mAuth.getCurrentUser().getUid();
         name = inputname.getText().toString().trim();
@@ -127,7 +130,7 @@ public class ActEditProfile extends AppCompatActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-
+        // user change profile picture
         if (imUri != null) {
             StorageReference fileR = mStore.child(System.currentTimeMillis() + "." + getFileExt(imUri));
             fileR.putFile(imUri)
@@ -173,6 +176,7 @@ public class ActEditProfile extends AppCompatActivity {
                             });
                         }
                     });
+            // user doesn't change profile picture
         } else {
             ProfileUser users = new ProfileUser(name, email, currImageUrl);
             db.collection("Users").document(uId)
@@ -185,7 +189,6 @@ public class ActEditProfile extends AppCompatActivity {
                             Intent intent = new Intent(getBaseContext(), ActProfile.class);
                             startActivity(intent);
                             finish();
-
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -199,6 +202,7 @@ public class ActEditProfile extends AppCompatActivity {
 
     }
 
+    // get current profile when want edit profile
     public void getCurrentProfile() {
         String uId = mAuth.getCurrentUser().getUid();
         db.collection("Users").document(uId)

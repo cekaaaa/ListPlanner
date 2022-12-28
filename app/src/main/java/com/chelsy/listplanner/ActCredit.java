@@ -17,6 +17,7 @@ public class ActCredit extends AppCompatActivity {
 
     ImageView linkedin, instagram, github, ukrida;
 
+    // menu inflater
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -24,6 +25,7 @@ public class ActCredit extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // item menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -82,7 +84,5 @@ public class ActCredit extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 }
