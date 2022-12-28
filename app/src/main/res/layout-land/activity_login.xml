@@ -5,12 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login">
-
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/progressBar"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -67,15 +61,6 @@
                     android:fontFamily="@font/poppinsregular" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppinssemibold"
-                android:textColor="@color/bg"
-                android:layout_marginVertical="10dp"
-                android:text="Forgot Password?"
-                android:layout_gravity="end"/>
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnlogin2"
                 android:layout_width="match_parent"
@@ -115,5 +100,9 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/progressBar"/>
 </RelativeLayout>

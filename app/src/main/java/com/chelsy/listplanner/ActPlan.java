@@ -52,6 +52,7 @@ public class ActPlan extends AppCompatActivity {
     ShapeableImageView profPic;
     String imgUrl;
 
+    // menu iflater
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -59,6 +60,7 @@ public class ActPlan extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    // item menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -84,6 +86,8 @@ public class ActPlan extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        //recycle plan
         recyclerPlan = findViewById(R.id.recPlan);
         recyclerPlan.setLayoutManager(new LinearLayoutManager(this));
         recyclerPlan.setHasFixedSize(true);
@@ -115,6 +119,7 @@ public class ActPlan extends AppCompatActivity {
         getUser();
     }
 
+    // Get user for profile picture and textview
     public void getUser() {
         String uId = mAuth.getCurrentUser().getUid();
         db.collection("Users").document(uId)
@@ -135,6 +140,7 @@ public class ActPlan extends AppCompatActivity {
                 });
     }
 
+    // populate data plan
     public void PopData() {
         String uId = mAuth.getCurrentUser().getUid();
         db.collection("Plans")

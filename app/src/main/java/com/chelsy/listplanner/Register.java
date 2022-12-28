@@ -26,7 +26,6 @@ import com.google.firebase.firestore.auth.User;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class Register extends AppCompatActivity {
 
     EditText inputUserEdit, inputEmailEdit, inputPassEdit, inputRepassEdit;
@@ -43,6 +42,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        //hide action bar
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
@@ -53,9 +53,11 @@ public class Register extends AppCompatActivity {
         inputEmailEdit = (EditText) findViewById(R.id.txtemail);
         inputPassEdit = (EditText) findViewById(R.id.txtpass);
         inputRepassEdit = (EditText) findViewById(R.id.txtrepass);
+        // database
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        // go to login activity if click login textview
         login = (TextView) findViewById(R.id.txtlogin);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +66,7 @@ public class Register extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        // register new account
         btnregis = (Button) findViewById(R.id.btnregis);
         btnregis.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,12 +120,13 @@ public class Register extends AppCompatActivity {
         }
 
         progressBar.setVisibility(View.VISIBLE);
-        // register account
+        // process register account
         mAuth.createUserWithEmailAndPassword(inputEmail, inputPass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            // add to database collection "Users"
                             String uId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                             user.put("email", inputEmail);
                             user.put("username", inputUser);
