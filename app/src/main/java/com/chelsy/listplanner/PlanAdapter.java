@@ -30,11 +30,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
     FirebaseFirestore db;
     AlertDialog.Builder builder;
 
+    // constructor adapter
     public PlanAdapter(Context context, ArrayList<AlterPlans> plansArr) {
         this.context = context;
         this.plansArr = plansArr;
     }
 
+    // create view holder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +44,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+    //binding content of the card plan
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         db = FirebaseFirestore.getInstance();
@@ -65,11 +68,13 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         });
     }
 
+    // array size data
     @Override
     public int getItemCount() {
         return plansArr.size();
     }
 
+    // content of view holder
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView editTitle, editDate, editTime;
         Button btndelete;
@@ -85,6 +90,7 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
         }
     }
 
+    // delete card plan
     private void deletePlan(String uId, AlterPlans alterPlans) {
         builder = new AlertDialog.Builder(context);
         builder.setMessage("Are you sure to delete this plan?")
@@ -111,6 +117,5 @@ public class PlanAdapter extends RecyclerView.Adapter<PlanAdapter.ViewHolder> {
                 })
                 .setNegativeButton("No, Keep it", null)
                 .show();
-
     }
 }

@@ -45,13 +45,16 @@ public class SetPLan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // hide action bar
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
         setContentView(R.layout.activity_set_plan);
 
+        //progress bar
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+        //database firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
@@ -65,7 +68,6 @@ public class SetPLan extends AppCompatActivity {
 
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
-
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +104,7 @@ public class SetPLan extends AppCompatActivity {
         }
     }
 
+    //date dialog
     private void dateDialog(EditText dateEdit) {
         DatePickerDialog datePickerDialog;
         DatePickerDialog.OnDateSetListener dataSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -122,6 +125,7 @@ public class SetPLan extends AppCompatActivity {
         datePickerDialog.show();
     }
 
+    // time dialog
     private void timeDialog(EditText timeEdit) {
         TimePickerDialog timePickerDialog;
         TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
@@ -139,6 +143,7 @@ public class SetPLan extends AppCompatActivity {
         timePickerDialog.show();
     }
 
+    // add plan
     public void addPlan() {
         String inputTitle, inputDate, inputTime, inputDesc, uId;
         inputTitle = nameEdit.getText().toString().trim();
@@ -167,19 +172,20 @@ public class SetPLan extends AppCompatActivity {
             descEdit.requestFocus();
             return;
         }
-        if (inputDesc.length() < 50) {
-            descEdit.setError("Decription must be minimum 50 characters");
+        if (inputDesc.length() < 30) {
+            descEdit.setError("Decription must be minimum 30 characters");
             descEdit.requestFocus();
             return;
         }
-        if (inputTitle.length() < 10) {
-            nameEdit.setError("Name of plan must be minimum 10 characters");
+        if (inputTitle.length() < 8) {
+            nameEdit.setError("Name of plan must be minimum 8 characters");
             nameEdit.requestFocus();
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
 
         Plans dataPlan = new Plans(inputTitle, inputDate, inputTime, inputDesc, uId);
+        // edit plan
         if (uIdPlan != null) {
             db.collection("Plans").document(uIdPlan)
                     .set(dataPlan)
@@ -201,6 +207,7 @@ public class SetPLan extends AppCompatActivity {
                             Toast.makeText(getBaseContext(), "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+            // add plan
         } else {
             db.collection("Plans")
                     .add(dataPlan)
@@ -224,6 +231,7 @@ public class SetPLan extends AppCompatActivity {
         }
     }
 
+    // get data for edit plan
     private void editPlan(String uIdPlan) {
         db.collection("Plans").document(uIdPlan)
                 .get()

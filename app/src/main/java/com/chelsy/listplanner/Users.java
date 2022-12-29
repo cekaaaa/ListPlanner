@@ -8,5 +8,4 @@ public class Users {
         this.username = username;
         this.email = email;
     }
-
 }

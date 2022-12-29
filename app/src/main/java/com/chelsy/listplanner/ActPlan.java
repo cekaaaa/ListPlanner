@@ -52,7 +52,7 @@ public class ActPlan extends AppCompatActivity {
     ShapeableImageView profPic;
     String imgUrl;
 
-    // menu iflater
+    // menu inflater
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -87,7 +87,7 @@ public class ActPlan extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        //recycle plan
+        //recycler plan
         recyclerPlan = findViewById(R.id.recPlan);
         recyclerPlan.setLayoutManager(new LinearLayoutManager(this));
         recyclerPlan.setHasFixedSize(true);
