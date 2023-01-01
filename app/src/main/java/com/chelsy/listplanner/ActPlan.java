@@ -60,11 +60,18 @@ public class ActPlan extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getUser();
+    }
+
     // item menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.home){
+            
             Intent intent = new Intent(getBaseContext(), ActPlan.class);
             startActivity(intent);
         }
