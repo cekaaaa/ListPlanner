@@ -77,8 +77,6 @@ public class SetPLan extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), ActPlan.class);
-                startActivity(intent);
                 finish();
             }
         });
@@ -195,8 +193,6 @@ public class SetPLan extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 progressBar.setVisibility(View.GONE);
                                 Toast.makeText(getBaseContext(), "Plan has been updated", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getBaseContext(), ActPlan.class);
-                                startActivity(intent);
                                 finish();
                             }
                         }
@@ -216,8 +212,6 @@ public class SetPLan extends AppCompatActivity {
                         public void onSuccess(DocumentReference documentReference) {
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(getBaseContext(), "Your plan has been added", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(getBaseContext(), ActPlan.class);
-                            startActivity(intent);
                             finish();
                         }
                     })

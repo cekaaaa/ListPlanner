@@ -48,10 +48,7 @@ public class ActProfile extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ActPlan.class);
             startActivity(intent);
         }
-        if (id == R.id.profile){
-            Intent intent = new Intent(getBaseContext(), ActProfile.class);
-            startActivity(intent);
-        }
+
         if (id == R.id.about){
             Intent intent = new Intent(getBaseContext(), ActCredit.class);
             startActivity(intent);
@@ -94,6 +91,7 @@ public class ActProfile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ActEditProfile.class);
                 startActivity(intent);
+                finish();
             }
         });
         getUser();

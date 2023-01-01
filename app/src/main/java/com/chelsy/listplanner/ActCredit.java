@@ -33,12 +33,9 @@ public class ActCredit extends AppCompatActivity {
             Intent intent = new Intent(getBaseContext(), ActPlan.class);
             startActivity(intent);
         }
+
         if (id == R.id.profile){
             Intent intent = new Intent(getBaseContext(), ActProfile.class);
-            startActivity(intent);
-        }
-        if (id == R.id.about){
-            Intent intent = new Intent(getBaseContext(), ActCredit.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

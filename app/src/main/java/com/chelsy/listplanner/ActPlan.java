@@ -64,17 +64,14 @@ public class ActPlan extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getUser();
+        plansArr.clear();
+        PopData();
     }
 
     // item menu
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.home){
-            
-            Intent intent = new Intent(getBaseContext(), ActPlan.class);
-            startActivity(intent);
-        }
         if (id == R.id.profile){
             Intent intent = new Intent(getBaseContext(), ActProfile.class);
             startActivity(intent);
@@ -102,7 +99,6 @@ public class ActPlan extends AppCompatActivity {
         plansArr = new ArrayList<AlterPlans>();
         adapter = new PlanAdapter(ActPlan.this, plansArr);
         recyclerPlan.setAdapter(adapter);
-        PopData();
 
         addPlan = (FloatingActionButton) findViewById(R.id.addPlan);
         addPlan.setOnClickListener(new View.OnClickListener() {

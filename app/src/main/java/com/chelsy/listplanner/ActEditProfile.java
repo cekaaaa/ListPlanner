@@ -80,6 +80,7 @@ public class ActEditProfile extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), ActProfile.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -99,6 +100,14 @@ public class ActEditProfile extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, PICK_IMG);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getBaseContext(), ActProfile.class);
+        startActivity(intent);
+        finish();
     }
 
     // get intent result
